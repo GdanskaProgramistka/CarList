@@ -1,26 +1,24 @@
+import java.util.List;
+
 public class Main {
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
-            PartList volvoList = new PartList();
-            Part part1 = new Part("left lamp");
-            Part part2 = new Part("bumper");
-            Part part3 = new Part("V-belt");
-            volvoList.add(part1);
-            volvoList.add(part2);
-            volvoList.add(part3);
-            orderList.add(volvoList);
+         Mechanic partToRepairList = new Mechanic();
+         Mechanic partInStockList = new Mechanic();
+         Mechanic orderList = new Mechanic();
+         Car car1 = new Car("VolvoS80", "v-belt");
+         Car car2 = new Car("RenaultMegane", "leftLamp");
+         Car car3 = new Car("OpelCorsa", "bumper");
 
-            PartList renaultMeganeList = new PartList();
-            Part part4 = new Part("left lamp");
-            Part part5 = new Part("bumper");
-            Part part6 = new Part("V-belt");
-            renaultMeganeList.add(part4);
-            renaultMeganeList.add(part5);
-            renaultMeganeList.add(part6);
-            orderList.add(volvoList);
 
-            Mechanic mechanicAnia = new Mechanic("VolvoS80", "volvoList");
-            Mechanic mechanicPrzemek = new Mechanic("Renaut Megane", "renaultMeganeList");
+         partToRepairList.acceptCar(car1);
+         partToRepairList.acceptCar(car2);
+         partToRepairList.acceptCar(car3);
 
-        }
-    }
+         orderList.acceptPart("v-belt");
+         partInStockList.acceptPart("v-belt");
+
+
+         orderList.repairCar(car1);
+     }
+}
