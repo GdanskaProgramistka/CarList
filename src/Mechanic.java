@@ -1,36 +1,65 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-    public class Mechanic {
+public class Mechanic {
 
-        List<String> partInStockList;
-        List<String> partToRepairList;
-        List<String> orderList;
+    List<Part> partInStockList;
+    List<Part> partToRepairList;
+    List<Part> orderList;
 
-        public Mechanic() {
-            this.partInStockList = new ArrayList<>();
-            this.partToRepairList = new ArrayList<>();
-            this.orderList = new ArrayList<>();
+    public Mechanic() {
+        this.partInStockList = new ArrayList<>();
+        this.partToRepairList = new ArrayList<>();
+        this.orderList = new ArrayList<>();
 
-            partInStockList = List.of("lefLamp", "rightLamp", "bumper");
-        }
+        partInStockList = new ArrayList<>();
+        partInStockList.add(new Part ("lefLamp"));
+        partInStockList.add(new Part ("rightLamp"));
+        partInStockList.add(new Part ("bumper"));
+    }
 
-        public void acceptCar(Car car) {
-            this.partToRepairList.add(car.getPart());
-            if (this.partInStockList.contains(car.getPart())) {
-                this.partInStockList.remove(car.getPart());
-            } else {
-                this.orderList.add(car.getPart());
-            }
-        }
-        //when parts come:
-        public void acceptPart(String part) {
-            this.orderList.remove(part);
-            this.partInStockList.add(part);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mechanic mechanic = (Mechanic) o;
+        return Objects.equals(partInStockList, mechanic.partInStockList) &&
+                Objects.equals(partToRepairList, mechanic.partToRepairList) &&
+                Objects.equals(orderList, mechanic.orderList);
+    }
 
-        public void repairCar(Car car) {
+    @Override
+    public int hashCode() {
+        return Objects.hash(partInStockList, partToRepairList, orderList);
+    }
+
+    public void acceptCar(Car car) {
+        this.partToRepairList.add(car.getPart());
+        if (this.partInStockList.contains(car.getPart())) {
             this.partInStockList.remove(car.getPart());
+        } else {
+            this.orderList.add(car.getPart());
         }
     }
+
+    //when parts come:
+    public void acceptPart(Part part) {
+        this.orderList.remove(part);
+        this.partInStockList.add(part);
+    }
+
+    public void repairCar(Car car) {
+        this.partInStockList.remove(car.getPart());
+    }
+
+    @Override
+    public String toString() {
+        return "Mechanic{" +
+                "partInStockList=" + partInStockList +
+                ", partToRepairList=" + partToRepairList +
+                ", orderList=" + orderList +
+                '}';
+    }
+}
 

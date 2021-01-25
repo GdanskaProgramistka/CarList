@@ -1,15 +1,15 @@
 public class Car {
 
     String carName;
-    String part;
+    Part part;
 
-    public Car(String carName, String part) {
+    public Car(String carName, Part part) {
         this.carName = carName;
         this.part = part;
     }
 
-    public String getPart() {
-        return getPart();
+    public Part getPart() {
+        return part;
     }
 
 
